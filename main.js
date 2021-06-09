@@ -14,8 +14,10 @@
     // https://code.jquery.com/jquery-3.6.0.min.js
     'use strict';
 
-    // Фикс проблем с editor-ом для старого jQuery форума.
-    $.browser={ msie: ( navigator.appName == 'Microsoft Internet Explorer') ? true : false }
+    /// ПОЛЬЗОВАТЕЛЬСКАЯ КОНФИГУРАЦИЯ:    //////
+    // Время между автоматическими сохранениями поста:
+    const autosavePostIntervalTime = 15;
+    ////////////////////////////////////////////
 
     // postContainerPrefix должен быть довольно уникальным, чтобы не вызывать проблем с совместимостью
     const postContainerPrefix = "P0ST_C0NTAINER";
@@ -38,25 +40,7 @@
 
     const autosaveConfigPostfix = "isAutosaveEnabled";
 
-    // Время между автоматическими сохранениями поста:
-    const autosavePostIntervalTime = 15;
-
     const postPreviewLength = 25;
-
-    // const doOnLoad = (func) => {
-    //     $(function(){func()});
-    // }
-
-    // const addEventListenerToMainReply = () => {
-    //     mainReply.on('change keyup paste', function(){
-    //         let currentValue = $(this).val();
-    //         if (oldMainReplyValue == currentValue){
-    //             return;
-    //         }
-    //         oldMainReplyValue = currentValue;
-    //         console.log(currentValue);
-    //     });
-    // }
 
     const getURLParametersFromString = (url, parameterSplitter="#") => {
         const _emptyArray = [];
@@ -129,11 +113,6 @@
     const checkIfPageExistsInLocalStorage = (pageId) => {
       const pageContainerKey = getLocalStorageKeyByPageId(pageId);
       return checkIfKeyIsInLocalStorage(pageContainerKey);
-    }
-
-    const saveCurrentPageInLocalStorage = () => {
-      const currentPageStorageKey = getLocalStorageKeyByPageId(currentThemeId);
-      setKeyInLocalStorage(currentPageStorageKey, "1");
     }
 
     const getCurrentPostText = () => {
